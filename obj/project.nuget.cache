@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "w5Oae6yN5tg1EfoEhfoxWJxFDgif3d4QJHHDZyHzdUaNGoX7vc9w5NMapBUjY8evjej33mz28nB19yTQi73AFA==",
+  "success": true,
+  "projectFilePath": "C:\\CESI\\A4\\Ceseat\\UserManagement\\CeseatUserManagement\\CeseatUserManagement.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lafarge Dylan\\.nuget\\packages\\mvvmlightlibs\\5.4.1.1\\mvvmlightlibs.5.4.1.1.nupkg.sha512",
+    "C:\\Users\\Lafarge Dylan\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Le package 'MvvmLightLibs 5.4.1.1' a été restauré en utilisant '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' au lieu du framework cible du projet '.NETCoreApp,Version=v3.1'. Ce package n'est peut-être pas totalement compatible avec votre projet.",
+      "libraryId": "MvvmLightLibs",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

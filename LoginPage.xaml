@@ -1,0 +1,27 @@
+﻿<Page x:Class="CeseatUserManagement.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CeseatUserManagement"
+      xmlns:viewModel="clr-namespace:CeseatUserManagement.LoginSpace"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoginPage">
+
+    <Grid>
+        <Canvas HorizontalAlignment="Center" Height="314" VerticalAlignment="Center" Width="162">
+            <Image Height="121" Width="162" Source="/logo_typo.png"/>
+            <TextBox x:Name="identifiant" TextWrapping="Wrap" Text="{Binding Identifiant}" Width="162" Height="21" Canvas.Top="156"/>
+            <Label Content="Identifiant" Canvas.Top="130"/>
+            <Label Content="Mot de Passe" Canvas.Top="186"/>
+            <PasswordBox x:Name="password" Width="162" Height="21" Canvas.Top="212"/>
+            <Button Content="Se connecter" Width="162" Height="24" Background="#FFCA6B3E" BorderBrush="#FFCA6B3E" Foreground="White" Canvas.Top="254" Click="login"/>
+            <Button Content="S'inscrire" Width="162" Height="24" Foreground="#FFCA6B3E" BorderBrush="#FFCA6B3E" Canvas.Top="290" >
+                <Button.Background>
+                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0"/>
+                </Button.Background>
+            </Button>
+        </Canvas>
+    </Grid>
+</Page>

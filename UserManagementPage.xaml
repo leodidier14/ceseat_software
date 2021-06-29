@@ -1,0 +1,43 @@
+﻿<Page x:Class="CeseatUserManagement.UserManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CeseatUserManagement"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserManagementPage">
+    <Page.Resources>
+        <CollectionViewSource Source="{Binding Users}" x:Key="users"/>
+    </Page.Resources>
+
+    <Grid>
+        <Label Content="Utilisateurs de Ces'Eat" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="42" Width="270" FontSize="24" FontWeight="Bold" Foreground="#FFCA6B3E"/>
+        <Label Content="Recherche" HorizontalAlignment="Right" Margin="0,7,140,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Right" Margin="0,30,20,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="22" Text="{Binding SearchingName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <!--<FrameworkElement x:Name="frameworkElement" />-->
+        <DataGrid Name="UsersTable" CanUserResizeRows="False" ItemsSource="{Binding Source={StaticResource users}}" AutoGenerateColumns="False" SelectionMode="Single" AlternatingRowBackground="#ca6b3e" Margin="20,73,20,45">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Email" IsReadOnly="True" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Nom" IsReadOnly="True" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Prénom" IsReadOnly="True" Binding="{Binding FirstName}" />
+                <DataGridTemplateColumn Header="Role">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValue="{Binding Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=DataContext.UserRoles, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Supprimer" CommandParameter="{Binding SelectedItem, ElementName=UsersTable}" Command="{Binding DeleteUserCommand}" HorizontalAlignment="Right" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="75" Background="#FFCA6B3E" BorderBrush="#FFCA6B3E" Foreground="White"/>
+        <Button Content="Actualiser" HorizontalAlignment="Right" Margin="0,0,110,20" VerticalAlignment="Bottom" Command="{Binding RefreshDataCommand}" Width="66" BorderBrush="#FFCA6B3E" Foreground="#FFCA6B3E">
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.04"/>
+            </Button.Background>
+        </Button>
+        <Label Content="Role" HorizontalAlignment="Right" Margin="0,7,310,0" VerticalAlignment="Top"/>
+        <ComboBox ItemsSource="{Binding FilterRoles}" SelectedItem="{Binding SelectedFilterRole, Mode=TwoWay}" HorizontalAlignment="Right" Margin="0,30,220,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Page>

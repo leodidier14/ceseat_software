@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Lafarge Dylan\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Lafarge Dylan\\.nuget\\packages"
+    ]
+  }
+}
