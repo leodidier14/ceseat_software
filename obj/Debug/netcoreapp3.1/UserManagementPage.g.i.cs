@@ -61,7 +61,7 @@ namespace CeseatUserManagement {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/CeseatUserManagement;V1.0.0.0;component/usermanagementpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/CeseatUserManagement;component/usermanagementpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\UserManagementPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

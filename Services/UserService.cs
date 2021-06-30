@@ -15,7 +15,7 @@ namespace CeseatUserManagement.UserManagementSpace
         Uri baseApiAddress;
         public UserService()
         {
-            this.baseApiAddress = new Uri("https://localhost:3030/");
+            this.baseApiAddress = new Uri("http://localhost:3000/");
 
             this.users = new List<IUser>();
             users.Add(new User("1", "dylan.lafarge@viacesi.fr", "Lafarge", "Dylan", "Client"));
