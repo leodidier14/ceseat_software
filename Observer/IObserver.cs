@@ -6,6 +6,6 @@ namespace CeseatUserManagement.UserManagementSpace
 {
     interface IObserver
     {
-        void updateUser(IUser user);
+        void updateUser(User user);
     }
 }

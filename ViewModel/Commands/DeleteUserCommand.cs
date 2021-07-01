@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 
 namespace CeseatUserManagement.UserManagementSpace.Commands
 {
     class DeleteUserCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
         public UserManagementViewModel ViewModel { get; set; }
 
         public DeleteUserCommand(UserManagementViewModel viewModel)
@@ -25,9 +21,15 @@ namespace CeseatUserManagement.UserManagementSpace.Commands
             return false;
         }
 
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
         public void Execute(object parameter)
         {
-            this.ViewModel.deleteUser(parameter as IUser);
+            this.ViewModel.deleteUser(parameter as User);
         }
     }
 }

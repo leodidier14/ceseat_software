@@ -29,10 +29,7 @@ namespace CeseatUserManagement
 
         private void login(object sender, RoutedEventArgs e)
         {
-            //Login with these informations, without storing the password
-            //this.password.Password;
-            //this.identifiant.Text;
-            Boolean isConnected = this.viewModel.login(this.identifiant.Text, this.password.Password).Result;
+            Boolean isConnected = this.viewModel.Login(this.email.Text, this.password.Password).Result;
             if (isConnected)
             {
                 this.NavigationService.Navigate(new Uri("UserManagementPage.xaml", UriKind.Relative));

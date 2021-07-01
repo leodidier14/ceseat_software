@@ -19,7 +19,10 @@ namespace CeseatUserManagement.UserManagementSpace
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 
-        [JsonProperty("role")]
+        [JsonProperty("userType")]
         public string Role { get; set; }
+
+        [JsonProperty("isSuspended")]
+        public Boolean IsSuspended { get; set; }
     }
 }

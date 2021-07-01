@@ -12,7 +12,7 @@
     <Grid>
         <Canvas HorizontalAlignment="Center" Height="314" VerticalAlignment="Center" Width="162">
             <Image Height="121" Width="162" Source="/logo_typo.png"/>
-            <TextBox x:Name="identifiant" TextWrapping="Wrap" Text="{Binding Identifiant}" Width="162" Height="21" Canvas.Top="156"/>
+            <TextBox x:Name="email" TextWrapping="Wrap" Width="162" Height="21" Canvas.Top="156"/>
             <Label Content="Identifiant" Canvas.Top="130"/>
             <Label Content="Mot de Passe" Canvas.Top="186"/>
             <PasswordBox x:Name="password" Width="162" Height="21" Canvas.Top="212"/>

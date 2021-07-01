@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace CeseatUserManagement.UserManagementSpace
 {
@@ -24,40 +24,95 @@ namespace CeseatUserManagement.UserManagementSpace
             users.Add(new User("4", "dylan.lafarge@viacesi.fr", "Doignon", "Guillaume", "Commercial"));
         }
 
-        public async Task<List<IUser>> getUsers()
+        public async Task<List<User>> getUsers()
         {
-            List<IUser> _users = null;
-            _users = this.users;
+            List<User> _users = new List<User>();
+            //_users = this.users;
 
-            //using (var httpClient = new HttpClient { BaseAddress = this.baseApiAddress })
+            //var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:3000/app/user");
+            //httpWebRequest.ContentType = "application/json";
+            //httpWebRequest.Method = "GET";
+            //httpWebRequest.PreAuthenticate = true;
+            //httpWebRequest.Headers.Add("Authorization", "Bearer " + AccesToken.GetInstance().AccesTokenValue);
+            //httpWebRequest.Accept = "application/json";
+
+            //LoginResponse responseObject;
+
+            //using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             //{
-            //    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "token");
+            //    string json = "{\"email\":\"" + email + "\"," +
+            //                  "\"password\":\"" + password + "\"}";
 
-            //    HttpResponseMessage response = await httpClient.GetAsync("users/");
+            //    streamWriter.Write(json);
+            //}
 
-            //    if (response.IsSuccessStatusCode)
+            //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            //{
+            //    var result = streamReader.ReadToEnd();
+            //    _users = JsonConvert.DeserializeObject<List<IUser>>(result);
+            //    if(_users != null && _users.Count > 0)
             //    {
-            //        string usersString = await response.Content.ReadAsStringAsync();
-
-            //        _users = JsonConvert.DeserializeObject<List<IUser>>(usersString);
+            //        IUser user = _users[0];
             //    }
             //}
 
+            using (var httpClient = new HttpClient { BaseAddress = this.baseApiAddress })
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccesToken.GetInstance().AccesTokenValue);
+
+                HttpResponseMessage response = await httpClient.GetAsync("app/user");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string usersString = await response.Content.ReadAsStringAsync();
+
+                    _users = JsonConvert.DeserializeObject<List<User>>(usersString);
+                }
+            }
+
             return _users;
+            //return this.users;
         }
 
         public async Task<HttpStatusCode> deleteUser(IUser user)
         {
             using (var httpClient = new HttpClient { BaseAddress = this.baseApiAddress })
             {
-                HttpResponseMessage response = await httpClient.DeleteAsync($"api/users/{user.Id}");
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccesToken.GetInstance().AccesTokenValue);
+
+                HttpResponseMessage response = await httpClient.DeleteAsync($"user/{user.Id}");
                 return response.StatusCode;
             }
         }
 
         public async void updateUser(IUser user)
         {
-            Console.WriteLine(user.Role);
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:3000/app/user/" + user.Id);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "PUT";
+            httpWebRequest.PreAuthenticate = true;
+            httpWebRequest.Headers.Add("Authorization", "Bearer " + AccesToken.GetInstance().AccesTokenValue);
+
+            //LoginResponse responseObject;
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = "{\"userType\":\"" + user.Role + "\"," +
+                              "\"isSuspended\":\"" + user.IsSuspended + "\"}";
+
+                streamWriter.Write(json);
+            }
+
+            try
+            {
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            }
+            catch
+            {
+
+            }
         }
     }
 }

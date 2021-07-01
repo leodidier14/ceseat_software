@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace CeseatUserManagement.UserManagementSpace
 {
-    class UserManagementViewModel : IObserver
+    class UserManagementViewModel : IObserver, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private UserService userService;
 
-        public ObservableCollection<IUser> Users { get; set; }
+        public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<string> FilterRoles { get; set; }
         public ObservableCollection<string> UserRoles { get; set; }
         private CollectionViewSource CVS { get; set; }
@@ -119,13 +119,14 @@ namespace CeseatUserManagement.UserManagementSpace
 
         public UserManagementViewModel()
         {
+            this.Users = new ObservableCollection<User>();
+            this.FilterRoles = new ObservableCollection<string>();
+            this.UserRoles = new ObservableCollection<string>();
+
             this.initCommands();
             this.userService = new UserService();
             this.loadData();
-            //this.Users.Add(new User("1", "dylan.lafarge@viacesi.fr", "Lafarge", "Dylan", "Client"));
-            //this.Users.Add(new User("2", "dylan.lafarge@viacesi.fr", "Didier", "Léo", "Restaurant"));
-            //this.Users.Add(new User("3", "dylan.lafarge@viacesi.fr", "Kauffmann", "Romain", "Technicien"));
-            //this.Users.Add(new User("4", "dylan.lafarge@viacesi.fr", "Doignon", "Guillaume", "Commercial"));
+            
             Messenger.Default.Register<CollectionViewSource>(this, registerCVS);
         }
 
@@ -142,37 +143,41 @@ namespace CeseatUserManagement.UserManagementSpace
 
         private async void loadData()
         {
-            List<IUser> _users = new List<IUser>();
+            List<User> _users = new List<User>();
             await Task.Run(() =>
             {
                 _users = this.userService.getUsers().Result;
             });
-            //var _users = this.userService.getUsers();
+
 
             var _roles = from u in _users select u.Role;
 
-            this.UserRoles = new ObservableCollection<string>(_roles.Distinct());
+            this.UserRoles.Clear();
+            foreach (string role in _roles.Distinct())
+            {
+                this.UserRoles.Add(role);
+            }
 
             var _roleList = _roles.ToList();
             _roleList.Add("Tous");
-            this.FilterRoles = new ObservableCollection<string>(_roleList.Distinct());
+            
+            this.FilterRoles.Clear();
+            foreach (string filter in _roleList.Distinct())
+            {
+                this.FilterRoles.Add(filter);
+            }
 
-            foreach(IUser user in _users)
+            this.SelectedFilterRole = "Tous";
+
+            foreach (User user in _users)
             {
                 user.Attach(this);
             }
 
-            if (this.Users == null)
+            this.Users.Clear();
+            foreach (User user in _users)
             {
-                this.Users = new ObservableCollection<IUser>(_users);
-            }
-            else
-            {
-                this.Users.Clear();
-                foreach (IUser user in _users)
-                {
-                    this.Users.Add(user);
-                }
+                this.Users.Add(user);
             }
         }
 
@@ -239,7 +244,7 @@ namespace CeseatUserManagement.UserManagementSpace
                 e.Accepted = false;
         }
 
-        public async void deleteUser(IUser user)
+        public async void deleteUser(User user)
         {
             if (user == null)
                 return;
@@ -251,7 +256,7 @@ namespace CeseatUserManagement.UserManagementSpace
             //this.Users.Remove(user);
         }
 
-        public void updateUser(IUser user)
+        public void updateUser(User user)
         {
             if (user != null)
                 this.userService.updateUser(user);
