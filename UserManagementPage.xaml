@@ -15,7 +15,6 @@
         <Label Content="Utilisateurs de Ces'Eat" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="42" Width="270" FontSize="24" FontWeight="Bold" Foreground="#FFCA6B3E"/>
         <Label Content="Recherche" HorizontalAlignment="Right" Margin="0,7,140,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Right" Margin="0,30,20,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="22" Text="{Binding SearchingName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <!--<FrameworkElement x:Name="frameworkElement" />-->
         <DataGrid Name="UsersTable" CanUserResizeRows="False" ItemsSource="{Binding Source={StaticResource users}}" AutoGenerateColumns="False" SelectionMode="Single" AlternatingRowBackground="#ca6b3e" Margin="20,73,20,45">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding Id}" />

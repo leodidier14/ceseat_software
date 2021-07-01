@@ -21,8 +21,6 @@ namespace CeseatUserManagement.LoginSpace
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 
-            //LoginResponse responseObject;
-
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 string json = "{\"email\":\"" + email + "\"," +
@@ -41,25 +39,6 @@ namespace CeseatUserManagement.LoginSpace
                     AccesToken.GetInstance().AccesTokenValue = responseDict["token"].ToString();
                 }
             }
-            //string token = responseObject.token;
-
-            //using (var httpClient = new HttpClient { BaseAddress = this.baseApiAddress })
-            //{
-            //    var values = new Dictionary<string, string>
-            //    {
-            //        { "email", email },
-            //        { "password", password }
-            //    };
-
-            //    //var content = new FormUrlEncodedContent(values);
-            //    //content.Headers.ContentType.MediaType = "application/json";
-            //    var content = new StringContent(values.ToString(), Encoding.UTF8, "application/json");
-            //    HttpResponseMessage response = await httpClient.PostAsync("login", content);
-
-            //    var responseString = await response.Content.ReadAsStringAsync();
-
-            //    return responseString;
-            //}
         }
     }
 }

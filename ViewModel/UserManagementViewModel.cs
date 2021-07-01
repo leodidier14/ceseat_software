@@ -252,8 +252,6 @@ namespace CeseatUserManagement.UserManagementSpace
             await this.userService.deleteUser(user);
 
             this.loadData();
-
-            //this.Users.Remove(user);
         }
 
         public void updateUser(User user)

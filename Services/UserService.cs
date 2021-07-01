@@ -27,35 +27,6 @@ namespace CeseatUserManagement.UserManagementSpace
         public async Task<List<User>> getUsers()
         {
             List<User> _users = new List<User>();
-            //_users = this.users;
-
-            //var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:3000/app/user");
-            //httpWebRequest.ContentType = "application/json";
-            //httpWebRequest.Method = "GET";
-            //httpWebRequest.PreAuthenticate = true;
-            //httpWebRequest.Headers.Add("Authorization", "Bearer " + AccesToken.GetInstance().AccesTokenValue);
-            //httpWebRequest.Accept = "application/json";
-
-            //LoginResponse responseObject;
-
-            //using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            //{
-            //    string json = "{\"email\":\"" + email + "\"," +
-            //                  "\"password\":\"" + password + "\"}";
-
-            //    streamWriter.Write(json);
-            //}
-
-            //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            //{
-            //    var result = streamReader.ReadToEnd();
-            //    _users = JsonConvert.DeserializeObject<List<IUser>>(result);
-            //    if(_users != null && _users.Count > 0)
-            //    {
-            //        IUser user = _users[0];
-            //    }
-            //}
 
             using (var httpClient = new HttpClient { BaseAddress = this.baseApiAddress })
             {
@@ -93,8 +64,6 @@ namespace CeseatUserManagement.UserManagementSpace
             httpWebRequest.Method = "PUT";
             httpWebRequest.PreAuthenticate = true;
             httpWebRequest.Headers.Add("Authorization", "Bearer " + AccesToken.GetInstance().AccesTokenValue);
-
-            //LoginResponse responseObject;
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
