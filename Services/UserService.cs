@@ -15,7 +15,7 @@ namespace CeseatUserManagement.UserManagementSpace
         Uri baseApiAddress;
         public UserService()
         {
-            this.baseApiAddress = new Uri("http://localhost:3000/");
+            this.baseApiAddress = new Uri("http://172.16.44.43:3000/");
 
             this.users = new List<IUser>();
             users.Add(new User("1", "dylan.lafarge@viacesi.fr", "Lafarge", "Dylan", "Client"));
@@ -59,7 +59,7 @@ namespace CeseatUserManagement.UserManagementSpace
 
         public async void updateUser(IUser user)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:3000/app/user/" + user.Id);
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://172.16.44.43:3000/app/user/" + user.Id);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "PUT";
             httpWebRequest.PreAuthenticate = true;

@@ -12,12 +12,12 @@ namespace CeseatUserManagement.LoginSpace
         Uri baseApiAddress;
         public LoginService()
         {
-            this.baseApiAddress = new Uri("http://localhost:3000/");
+            this.baseApiAddress = new Uri("http://172.16.44.43:3000/");
         }
 
         public async Task login(string email, string password)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:3000/login");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://172.16.44.43:3000/login");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 
